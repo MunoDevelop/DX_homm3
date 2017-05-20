@@ -1,13 +1,13 @@
 ﻿  Matrices0999.cpp
 c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(8): warning C4100: 'lpCmdLine': unreferenced formal parameter
 c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(7): warning C4100: 'hPrevInstance': unreferenced formal parameter
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(112): warning C4100: 'rectY': unreferenced formal parameter
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(112): warning C4100: 'rectX': unreferenced formal parameter
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(158): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(97): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(218): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstring.h(121): note: see declaration of 'wcscpy'
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(357): warning C4018: '<': signed/unsigned mismatch
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(376): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(411): warning C4100: 'hero_right': unreferenced formal parameter
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(411): warning C4100: 'hero_left': unreferenced formal parameter
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(565): warning C4018: '<': signed/unsigned mismatch
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(584): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(619): warning C4100: 'hero_right': unreferenced formal parameter
+Matrices0999.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\Debug\Matrices0999.exe
   Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\Debug\Matrices0999.pdb (Full PDB)

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <d3dx9tex.h>
 
+
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 720
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
@@ -31,6 +32,12 @@ struct CUSTOMTEXTURE{
 	LPDIRECT3DTEXTURE9 texture;
 	D3DXIMAGE_INFO textureinfo;
 };
+
+struct IMAGESIZE {
+	int width;
+	int height;
+};
+
 class GameIntro {
 public:
 	CUSTOMTEXTURE Homm;
@@ -45,7 +52,6 @@ public:
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 using namespace std;
-
 
 
 class GameState {
@@ -66,8 +72,6 @@ public:
 		int quantity;
 		int location_x;
 		int location_y;
-		int textureWidth;
-		int textureHeight;
 
 		//anim
 		CUSTOMTEXTURE idle;
@@ -78,10 +82,11 @@ public:
 		vector <CUSTOMTEXTURE> beAttacked;
 		vector <CUSTOMTEXTURE> death;
 
-		string UnitName;
+		LPCWSTR UnitName;
 		int melee_attack;
-		int ranged_attack;
-		int Armor;
+		int remote_attack;
+		int health;
+		int defense;
 		int speed;
 
 		
@@ -136,9 +141,9 @@ void render_frame(GameIntro *intro ,GameObj* gameobj, Hero*hero_left, Hero*hero_
 void cleanD3D(void);		// closes Direct3D and releases memory
 void intro_render_frame(GameIntro *intro);
 bool cmp(const Child &a, const Child &b);
-void setTexture(int width,int height,const wchar_t fileLocation[], CUSTOMTEXTURE* texture);
+CUSTOMTEXTURE* setTexture(int width,int height,const wchar_t fileLocation[], CUSTOMTEXTURE* texture);
 void paint(LPD3DXSPRITE* P_d3dspt, LPDIRECT3DTEXTURE9 texture, int width, int height, int x, int y,int alpha);
-void text(LPCWSTR text, int rectX, int rectY, int alpha);
+//void text(LPCWSTR text, int rectX, int rectY, int alpha);
 ID3DXSprite* pSprite = NULL;
-
+bool GetImageSize(const char *fn, int *x, int *y);
 
