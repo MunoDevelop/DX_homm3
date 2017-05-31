@@ -1,0 +1,36 @@
+﻿  Matrices0999.cpp
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(158): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(162): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(165): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(168): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(171): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(186): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(189): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(194): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\Header.h(197): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Matrices0999.cpp(73): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+Matrices0999.cpp(8): warning C4100: 'lpCmdLine': unreferenced formal parameter
+Matrices0999.cpp(7): warning C4100: 'hPrevInstance': unreferenced formal parameter
+Matrices0999.cpp(112): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+Matrices0999.cpp(246): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstring.h(121): note: see declaration of 'wcscpy'
+Matrices0999.cpp(1814): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1826): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1839): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1842): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1939): warning C4456: declaration of 'rect' hides previous local declaration
+  Matrices0999.cpp(1915): note: see declaration of 'rect'
+Matrices0999.cpp(1939): warning C4838: conversion from 'UINT' to 'LONG' requires a narrowing conversion
+Matrices0999.cpp(1978): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(1978): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(1988): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(1988): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(1884): warning C4100: 'hero_right': unreferenced formal parameter
+Matrices0999.cpp(1884): warning C4100: 'hero_left': unreferenced formal parameter
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(139): warning C4715: 'Child::getAnimSpeedByState': not all control paths return a value
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(178): warning C4701: potentially uninitialized local variable 'currentTexture' used
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(191): warning C4715: 'Child::toRealLocationX': not all control paths return a value
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(199): warning C4715: 'Child::toRealLocationY': not all control paths return a value
+  Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\x64\Debug\Matrices0999.exe
+  Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\x64\Debug\Matrices0999.pdb (Full PDB)

@@ -1,13 +1,25 @@
 ﻿  Matrices0999.cpp
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(118): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(121): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(124): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(127): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(130): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(138): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(141): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(146): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(149): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(8): warning C4100: 'lpCmdLine': unreferenced formal parameter
 c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(7): warning C4100: 'hPrevInstance': unreferenced formal parameter
 c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(97): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(218): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(214): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_wstring.h(121): note: see declaration of 'wcscpy'
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(565): warning C4018: '<': signed/unsigned mismatch
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(584): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(619): warning C4100: 'hero_right': unreferenced formal parameter
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1736): warning C4018: '<': signed/unsigned mismatch
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1746): warning C4018: '<': signed/unsigned mismatch
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1747): warning C4018: '<': signed/unsigned mismatch
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1750): warning C4018: '<': signed/unsigned mismatch
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1773): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1808): warning C4100: 'hero_right': unreferenced formal parameter
 Matrices0999.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\Debug\Matrices0999.exe
   Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\Debug\Matrices0999.pdb (Full PDB)
