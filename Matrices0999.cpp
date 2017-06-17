@@ -1743,6 +1743,9 @@ void initD3D(HWND hWnd, GameIntro* intro, GameObj* gameobj, Hero* hero_left,Hero
 	GetImageSize("./InitturnList/testPoint.png", &imageX, &imageY);
 	setTexture(imageX, imageY, L"./InitturnList/testPoint.png", &gameobj->testPoint);
 
+	GetImageSize("./bg&hero&ui/tileSelected.png", &imageX, &imageY);
+	setTexture(imageX, imageY, L"./bg&hero&ui/tileSelected.png", &gameobj->tileSelected);
+
 	#pragma region unitVector Push
 	unitVector.push_back(*hero_left->child1);
 	unitVector.push_back(*hero_left->child2);
@@ -1788,6 +1791,11 @@ void initD3D(HWND hWnd, GameIntro* intro, GameObj* gameobj, Hero* hero_left,Hero
 		for (int j = 0; j < hexMap[i].size();j++) {
 			hexMap[i][j].P_child = NULL;
 			hexMap[i][j].UnitOnTile = false;
+
+			hexMap[i][j].realLocationX = hexMap[i][j].toRealLocationX(j, i);
+			hexMap[i][j].realLocationY = hexMap[i][j].toRealLocationY(j, i);
+
+			cout << "" << endl;
 			for (int k = 0; k < unitVector.size();k++) {
 				if (unitVector[k].virtualLocation_x == j&&unitVector[k].virtualLocation_y == i) {
 					hexMap[i][j].P_child = &unitVector[k];
@@ -1918,6 +1926,38 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 	D3DCOLOR c = D3DCOLOR_ARGB(255, 255, 255, 255);
 		pSprite->Draw(gameobj->background.texture, &rect, &v3, &v3_2, c);
 #pragma endregion
+		//-----------------------------------------
+		int introDistance = 1300;
+		float finalX, finalY;
+		for (int i = 0; i < hexMap.size();i++) {
+			for (int j = 0; j < hexMap[i].size(); j++) {
+				int distance = sqrt(pow(MAP_START_X+hexMap[i][j].realLocationX-mouse.x,2)
+					+ pow(MAP_START_Y+hexMap[i][j].realLocationY-mouse.y,2));
+				if (distance < introDistance) {
+					introDistance = distance;
+					finalX = hexMap[i][j].realLocationX;
+					finalY = hexMap[i][j].realLocationY;
+				}
+			}
+
+		}
+
+		
+			
+			paint(&d3dspt, 
+				
+				gameobj->tileSelected.texture,
+				
+				88,60,1
+				//,15,15
+				, MAP_START_X+ finalX-44,
+				MAP_START_Y+ finalY-30
+				,255 );
+		//  - child.getCurrentTexture().textureinfo.Width/2
+			//  - child.getCurrentTexture().textureinfo.Height
+		
+
+
 	
 	int turnVectorStartX = 300;
 	int turnVectorStartY = 25;
@@ -1944,23 +1984,23 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 			DT_SINGLELINE | DT_RIGHT| DT_BOTTOM, D3DCOLOR_RGBA(255, 255, 255, 255));
 		
 	}
+	//mouseLocation test
+	RECT mouserect = { 0,0,320,110};
+	int mouseX = mouse.x;
+	wchar_t istr1[32];
+	_itow_s(mouseX, istr1, 10);
+	int mouseY = mouse.y;
+	wchar_t istr2[32];
+	_itow_s(mouseY, istr2, 10);
 
-	//for each (Child child in unitVector)
-	//{
-	//	child.realLocationSetting();
-	//	paint(&d3dspt, 
-	//		child.getCurrentTexture().texture, 
-	//		//gameobj->testPoint.texture,
-	//		child.getCurrentTexture().textureinfo.Width, 
-	//		child.getCurrentTexture().textureinfo.Height
-	//	//	15,15
-	//		, MAP_START_X+child.realLocation_x - child.getCurrentTexture().textureinfo.Width / 2,
-	//		MAP_START_Y+child.realLocation_y - child.getCurrentTexture().textureinfo.Height
-	//		,255 );
-	////  - child.getCurrentTexture().textureinfo.Width/2
-	//	//  - child.getCurrentTexture().textureinfo.Height
-	//}
 
+
+	wcscat(istr1, istr2);
+	font->DrawTextW(pSprite, istr1, -1, &mouserect,
+		DT_SINGLELINE | DT_RIGHT | DT_BOTTOM, D3DCOLOR_RGBA(255, 255, 255, 255));
+
+
+	
 
 	for (int i = 0; i < hexMap.size(); i++) {
 		for (int j = 0; j < hexMap[i].size(); j++) {

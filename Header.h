@@ -191,7 +191,7 @@ public:
 		}
 		float toRealLocationY() {
 			if (virtualLocation_y % 2 == 1) {
-				return sqrt(3)/2 * RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX + sqrt(3) *RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX * virtualLocation_y;
+				return sqrt(3)/2 * RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX + sqrt(3)/2 *RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX * (virtualLocation_y-1);
 			}
 			else if (virtualLocation_y % 2 == 0) {
 				return  sqrt(3)/2 * RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX*virtualLocation_y;
@@ -201,6 +201,24 @@ public:
 struct tile {
 	Child * P_child;
 	bool UnitOnTile;
+	float realLocationX;
+	float realLocationY;
+	float toRealLocationX(int virtualLocation_x,int virtualLocation_y) {
+		if (virtualLocation_y % 2 == 1) {
+			return 3 * RADIOUS_HEXAGON / 2 + 3 * RADIOUS_HEXAGON*virtualLocation_x;
+		}
+		else if (virtualLocation_y % 2 == 0) {
+			return 3 * RADIOUS_HEXAGON*virtualLocation_x;
+		}
+	}
+	float toRealLocationY(int virtualLocation_x, int virtualLocation_y) {
+		if (virtualLocation_y % 2 == 1) {
+			return sqrt(3) / 2 * RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX + sqrt(3)/2 *RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX * (virtualLocation_y-1);
+		}
+		else if (virtualLocation_y % 2 == 0) {
+			return  sqrt(3) / 2 * RADIOUS_HEXAGON*RADIOUS_HEXAGON_FIX*virtualLocation_y;
+		}
+	}
 };
 
 class Mouse {
@@ -259,6 +277,7 @@ public:
 	CUSTOMTEXTURE lefthero_frame;
 	CUSTOMTEXTURE righthero_frame;
 	CUSTOMTEXTURE testPoint;
+	CUSTOMTEXTURE tileSelected;
 };
 
 
