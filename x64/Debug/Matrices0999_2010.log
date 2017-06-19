@@ -13,39 +13,41 @@ c:\users\huozi\desktop\new folder\dx_homm3\Header.h(211): warning C4244: 'return
 c:\users\huozi\desktop\new folder\dx_homm3\Header.h(216): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 c:\users\huozi\desktop\new folder\dx_homm3\Header.h(219): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 c:\users\huozi\desktop\new folder\dx_homm3\Header.h(214): warning C4100: 'virtualLocation_x': unreferenced formal parameter
-Matrices0999.cpp(73): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
-Matrices0999.cpp(8): warning C4100: 'lpCmdLine': unreferenced formal parameter
-Matrices0999.cpp(7): warning C4100: 'hPrevInstance': unreferenced formal parameter
-Matrices0999.cpp(112): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+Matrices0999.cpp(78): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+Matrices0999.cpp(10): warning C4100: 'lpCmdLine': unreferenced formal parameter
+Matrices0999.cpp(9): warning C4100: 'hPrevInstance': unreferenced formal parameter
+Matrices0999.cpp(142): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
-Matrices0999.cpp(246): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+Matrices0999.cpp(276): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstring.h(121): note: see declaration of 'wcscpy'
-Matrices0999.cpp(1822): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-Matrices0999.cpp(1834): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-Matrices0999.cpp(1847): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-Matrices0999.cpp(1850): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-Matrices0999.cpp(1935): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-Matrices0999.cpp(1955): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-Matrices0999.cpp(1955): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-Matrices0999.cpp(1979): warning C4456: declaration of 'rect' hides previous local declaration
-  Matrices0999.cpp(1923): note: see declaration of 'rect'
-Matrices0999.cpp(1979): warning C4838: conversion from 'UINT' to 'LONG' requires a narrowing conversion
-Matrices0999.cpp(1989): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-Matrices0999.cpp(1992): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-Matrices0999.cpp(1998): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+Matrices0999.cpp(1851): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1863): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1876): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1879): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+Matrices0999.cpp(1968): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(1987): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(1987): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(1992): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(1992): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(2018): warning C4456: declaration of 'rect' hides previous local declaration
+  Matrices0999.cpp(1952): note: see declaration of 'rect'
+Matrices0999.cpp(2018): warning C4838: conversion from 'UINT' to 'LONG' requires a narrowing conversion
+Matrices0999.cpp(2037): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\corecrt_wstring.h(101): note: see declaration of 'wcscat'
-Matrices0999.cpp(2018): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-Matrices0999.cpp(2018): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-Matrices0999.cpp(2028): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-Matrices0999.cpp(2028): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-Matrices0999.cpp(1892): warning C4100: 'hero_right': unreferenced formal parameter
-Matrices0999.cpp(1892): warning C4100: 'hero_left': unreferenced formal parameter
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1947): warning C4701: potentially uninitialized local variable 'finalX' used
-c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1947): warning C4701: potentially uninitialized local variable 'finalY' used
+Matrices0999.cpp(2057): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(2057): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(2067): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Matrices0999.cpp(2067): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Matrices0999.cpp(1921): warning C4100: 'hero_right': unreferenced formal parameter
+Matrices0999.cpp(1921): warning C4100: 'hero_left': unreferenced formal parameter
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1987): warning C4701: potentially uninitialized local variable 'finalX' used
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1987): warning C4701: potentially uninitialized local variable 'finalY' used
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1992): warning C4701: potentially uninitialized local variable 'final2X' used
+c:\users\huozi\desktop\new folder\dx_homm3\matrices0999.cpp(1992): warning C4701: potentially uninitialized local variable 'final2Y' used
 c:\users\huozi\desktop\new folder\dx_homm3\header.h(139): warning C4715: 'Child::getAnimSpeedByState': not all control paths return a value
 c:\users\huozi\desktop\new folder\dx_homm3\header.h(178): warning C4701: potentially uninitialized local variable 'currentTexture' used
-c:\users\huozi\desktop\new folder\dx_homm3\header.h(191): warning C4715: 'Child::toRealLocationX': not all control paths return a value
 c:\users\huozi\desktop\new folder\dx_homm3\header.h(199): warning C4715: 'Child::toRealLocationY': not all control paths return a value
+c:\users\huozi\desktop\new folder\dx_homm3\header.h(191): warning C4715: 'Child::toRealLocationX': not all control paths return a value
 c:\users\huozi\desktop\new folder\dx_homm3\header.h(213): warning C4715: 'tile::toRealLocationX': not all control paths return a value
 c:\users\huozi\desktop\new folder\dx_homm3\header.h(221): warning C4715: 'tile::toRealLocationY': not all control paths return a value
   Matrices0999_2010.vcxproj -> C:\Users\huozi\Desktop\New folder\DX_homm3\x64\Debug\Matrices0999.exe

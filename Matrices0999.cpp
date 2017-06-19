@@ -1,6 +1,8 @@
 #include "Header.h"
 
-
+GameState* gameState;
+int virtualMinX, virtualMinY;
+int virtualMin2X, virtualMin2Y;
 
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -33,6 +35,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	GameObj* gameobj = new GameObj();
 	Hero* hero_left = new Hero();
 	Hero* hero_right = new Hero();
+	//----gamestate
+	gameState = new GameState();
+	gameState->state = GameState::State::InputWaiting;
 
 	initD3D(hWnd, intro,gameobj, hero_left, hero_right);
 
@@ -73,6 +78,27 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	return msg.wParam;
 }
 
+bool clickedEmptyTile() {
+	bool key = true;
+	for (int i = 0; i < unitVector.size(); i++) {
+		if (unitVector[i].virtualLocation_x == virtualMinX&&unitVector[i].virtualLocation_y == virtualMinY) {
+			key = false;
+		}
+	}
+	return key;
+}
+bool move() {
+	hexMap[turnVector.front()->virtualLocation_y][turnVector.front()->virtualLocation_x].P_child = NULL;
+	hexMap[turnVector.front()->virtualLocation_y][turnVector.front()->virtualLocation_x].UnitOnTile = false;
+	turnVector.front()->virtualLocation_x = virtualMinX;
+	turnVector.front()->virtualLocation_y = virtualMinY;
+	hexMap[virtualMinY][virtualMinX].P_child = turnVector.front();
+	hexMap[virtualMinY][virtualMinX].UnitOnTile = true;
+	turnVector.front()->animstate = Child::AnimState::E_idle;
+	turnVector.erase(turnVector.begin());
+	turnVector.front()->animstate = Child::AnimState::E_selected;
+	return true;
+}
 // this is the main message handler for the program
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -84,11 +110,15 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		PostQuitMessage(0);
 		return 0;
 	} break;
-	/*case WM_LBUTTONDOWN:
+	case WM_LBUTTONDOWN:
 	{
-		PostQuitMessage(0);
+		if (gameState->state == GameState::State::InputWaiting) {
+			if (clickedEmptyTile()) {
+				move();
+		}
+		}
 		return 0;
-	} break;*/
+	} break;
 	case WM_MOUSEMOVE:
 	{
 		
@@ -1795,7 +1825,6 @@ void initD3D(HWND hWnd, GameIntro* intro, GameObj* gameobj, Hero* hero_left,Hero
 			hexMap[i][j].realLocationX = hexMap[i][j].toRealLocationX(j, i);
 			hexMap[i][j].realLocationY = hexMap[i][j].toRealLocationY(j, i);
 
-			cout << "" << endl;
 			for (int k = 0; k < unitVector.size();k++) {
 				if (unitVector[k].virtualLocation_x == j&&unitVector[k].virtualLocation_y == i) {
 					hexMap[i][j].P_child = &unitVector[k];
@@ -1928,33 +1957,43 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 #pragma endregion
 		//-----------------------------------------
 		int introDistance = 1300;
+		int intro2Distance = 1301;
+		
 		float finalX, finalY;
+		float final2X, final2Y;
+
 		for (int i = 0; i < hexMap.size();i++) {
 			for (int j = 0; j < hexMap[i].size(); j++) {
 				int distance = sqrt(pow(MAP_START_X+hexMap[i][j].realLocationX-mouse.x,2)
 					+ pow(MAP_START_Y+hexMap[i][j].realLocationY-mouse.y,2));
 				if (distance < introDistance) {
 					introDistance = distance;
+					virtualMinX = j;
+					virtualMinY = i;
 					finalX = hexMap[i][j].realLocationX;
 					finalY = hexMap[i][j].realLocationY;
+				}
+				if (distance > introDistance&&distance <= intro2Distance) {
+					intro2Distance = distance;
+					virtualMin2X = j;
+					virtualMin2Y = i;
+					final2X = hexMap[i][j].realLocationX;
+					final2Y = hexMap[i][j].realLocationY;
 				}
 			}
 
 		}
-
-		
+		//---------tile selected
+			paint(&d3dspt,gameobj->tileSelected.texture,88,60,1, MAP_START_X+ finalX-44,MAP_START_Y+ finalY-30,255 );
 			
-			paint(&d3dspt, 
+			if (hexMap[virtualMinY][virtualMinX].P_child!=NULL) {
+					if (virtualMin2X == turnVector.front()->virtualLocation_x&&
+						virtualMin2Y == turnVector.front()->virtualLocation_y) {
+						paint(&d3dspt, gameobj->tileSelected.texture, 88, 60, 1, MAP_START_X + final2X - 44, MAP_START_Y + final2Y - 30, 255);
+					}
+				}
 				
-				gameobj->tileSelected.texture,
-				
-				88,60,1
-				//,15,15
-				, MAP_START_X+ finalX-44,
-				MAP_START_Y+ finalY-30
-				,255 );
-		//  - child.getCurrentTexture().textureinfo.Width/2
-			//  - child.getCurrentTexture().textureinfo.Height
+			
 		
 
 
@@ -1986,10 +2025,10 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 	}
 	//mouseLocation test
 	RECT mouserect = { 0,0,320,110};
-	int mouseX = mouse.x;
+	int mouseX = virtualMin2X;
 	wchar_t istr1[32];
 	_itow_s(mouseX, istr1, 10);
-	int mouseY = mouse.y;
+	int mouseY = virtualMin2Y;
 	wchar_t istr2[32];
 	_itow_s(mouseY, istr2, 10);
 

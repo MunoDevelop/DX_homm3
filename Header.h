@@ -64,11 +64,11 @@ using namespace std;
 
 class GameState {
 public:
-	bool isMainMenu = 1;
+	
 	enum State{Running,InputWaiting};
 	State state;
 
-	GameState() {
+	~GameState() {
 
 	}
 };
@@ -295,4 +295,5 @@ ID3DXSprite* pSprite = NULL;
 bool GetImageSize(const char *fn, int *x, int *y);
 
 void GameLogic(GameIntro *intro);
-
+bool clickedEmptyTile();
+bool move();
