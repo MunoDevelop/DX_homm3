@@ -87,6 +87,7 @@ public:
 		float realLocation_x;
 		float realLocation_y;
 		bool active = true;
+		bool animFinish = false;
 
 		bool stateChanged = false;
 		//anim
@@ -143,6 +144,10 @@ public:
 				Anim_Key += getAnimSpeedByState();
 				if (Anim_Key > 1) {
 					Anim_Key = 0;
+					animFinish = true;
+				}
+				else {
+					animFinish = false;
 				}
 			}
 			else if (stateChanged) {
@@ -278,6 +283,8 @@ public:
 	CUSTOMTEXTURE righthero_frame;
 	CUSTOMTEXTURE testPoint;
 	CUSTOMTEXTURE tileSelected;
+	CUSTOMTEXTURE redWin;
+	CUSTOMTEXTURE greenWin;
 };
 
 
@@ -297,3 +304,7 @@ bool GetImageSize(const char *fn, int *x, int *y);
 void GameLogic(GameIntro *intro);
 bool clickedEmptyTile();
 bool move();
+
+void attack(Child* attacker,Child* beAttacked);
+
+void attackaniCon(Child* attacker, Child* beAttacked);

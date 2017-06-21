@@ -81,8 +81,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 bool clickedEmptyTile() {
 	bool key = true;
 	for (int i = 0; i < unitVector.size(); i++) {
+		if (unitVector[i].active == true) {
 		if (unitVector[i].virtualLocation_x == virtualMinX&&unitVector[i].virtualLocation_y == virtualMinY) {
 			key = false;
+		}
 		}
 	}
 	return key;
@@ -100,6 +102,23 @@ bool move() {
 	return true;
 }
 // this is the main message handler for the program
+void attack(Child* attacker, Child *beAttacked) {
+	gameState->state = GameState::State::Running;
+	int damage = attacker->melee_attack*attacker->quantity*(100-beAttacked->defense)/6;
+	int quantityLeft = (beAttacked->health*beAttacked->quantity - damage) / beAttacked->health;
+	if (quantityLeft < 0) {
+		quantityLeft = 0;
+		beAttacked->animstate = Child::AnimState::E_death;
+		beAttacked->stateChanged = 1;
+	}else {
+	beAttacked->animstate = Child::AnimState::E_beAttacked;
+	beAttacked->stateChanged = 1;
+	}
+	beAttacked->quantity = quantityLeft;
+	attacker->animstate = Child::AnimState::E_attack;
+	attacker->stateChanged = 1;
+}
+
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	 
@@ -115,8 +134,19 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		if (gameState->state == GameState::State::InputWaiting) {
 			if (clickedEmptyTile()) {
 				move();
+			}
+			else if ((hexMap[virtualMinY][virtualMinX].P_child != NULL)&&(hexMap[virtualMin2Y][virtualMin2X].P_child!=NULL)) {
+				if (hexMap[virtualMinY][virtualMinX].P_child->belong!= hexMap[virtualMin2Y][virtualMin2X].P_child->belong) {
+					if (virtualMin2X == turnVector.front()->virtualLocation_x&&
+						virtualMin2Y == turnVector.front()->virtualLocation_y) {
+						 attack(hexMap[virtualMin2Y][virtualMin2X].P_child, hexMap[virtualMinY][virtualMinX].P_child);
+					}
+				}
+			}
+
 		}
-		}
+
+
 		return 0;
 	} break;
 	case WM_MOUSEMOVE:
@@ -1776,6 +1806,13 @@ void initD3D(HWND hWnd, GameIntro* intro, GameObj* gameobj, Hero* hero_left,Hero
 	GetImageSize("./bg&hero&ui/tileSelected.png", &imageX, &imageY);
 	setTexture(imageX, imageY, L"./bg&hero&ui/tileSelected.png", &gameobj->tileSelected);
 
+
+	GetImageSize("./bg&hero&ui/redWin.png", &imageX, &imageY);
+	setTexture(imageX, imageY, L"./bg&hero&ui/redWin.png", &gameobj->redWin);
+
+	GetImageSize("./bg&hero&ui/greenWin.png", &imageX, &imageY);
+	setTexture(imageX, imageY, L"./bg&hero&ui/greenWin.png", &gameobj->greenWin);
+
 	#pragma region unitVector Push
 	unitVector.push_back(*hero_left->child1);
 	unitVector.push_back(*hero_left->child2);
@@ -1917,6 +1954,38 @@ void intro_render_frame(GameIntro *intro){
 	return;
 }
 
+void attackaniCon(Child* attacker, Child* beAttacked) {
+	if (gameState->state != GameState::State::Running) {
+		return;
+	}
+	if (attacker->animFinish == true && beAttacked->animFinish == true) {
+		if (beAttacked->quantity == 0) {
+			beAttacked->active = false;
+			hexMap[beAttacked->virtualLocation_y][beAttacked->virtualLocation_x].P_child = NULL;
+			hexMap[beAttacked->virtualLocation_y][beAttacked->virtualLocation_x].UnitOnTile = false;
+			for (int i = 0; i < turnVector.size(); i++) {
+				if (beAttacked->UnitName == turnVector[i]->UnitName) {
+				turnVector.erase(turnVector.begin()+i);
+				}
+			}
+			turnVector.erase(turnVector.begin());
+			gameState->state = GameState::State::InputWaiting;
+			attacker->animstate = Child::AnimState::E_idle;
+			turnVector.front()->animstate = Child::AnimState::E_selected;
+
+		}
+		else {
+			attacker->animstate = Child::AnimState::E_idle;
+			beAttacked->animstate = Child::AnimState::E_idle;
+			turnVector.erase(turnVector.begin());
+			gameState->state = GameState::State::InputWaiting;
+			turnVector.front()->animstate = Child::AnimState::E_selected;
+		}
+	}
+
+}
+
+
 // this is the function used to render a single frame
 void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_right)
 {
@@ -1956,46 +2025,52 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 		pSprite->Draw(gameobj->background.texture, &rect, &v3, &v3_2, c);
 #pragma endregion
 		//-----------------------------------------
-		int introDistance = 1300;
-		int intro2Distance = 1301;
-		
-		float finalX, finalY;
-		float final2X, final2Y;
 
-		for (int i = 0; i < hexMap.size();i++) {
-			for (int j = 0; j < hexMap[i].size(); j++) {
-				int distance = sqrt(pow(MAP_START_X+hexMap[i][j].realLocationX-mouse.x,2)
-					+ pow(MAP_START_Y+hexMap[i][j].realLocationY-mouse.y,2));
-				if (distance < introDistance) {
-					introDistance = distance;
-					virtualMinX = j;
-					virtualMinY = i;
-					finalX = hexMap[i][j].realLocationX;
-					finalY = hexMap[i][j].realLocationY;
+		if (gameState->state != GameState::State::Running) {
+			int introDistance = 1300;
+			int intro2Distance = 1301;
+
+			float finalX, finalY;
+			float final2X, final2Y;
+
+			for (int i = 0; i < hexMap.size(); i++) {
+				for (int j = 0; j < hexMap[i].size(); j++) {
+					int distance = sqrt(pow(MAP_START_X + hexMap[i][j].realLocationX - mouse.x, 2)
+						+ pow(MAP_START_Y + hexMap[i][j].realLocationY - mouse.y, 2));
+					if (distance < introDistance) {
+						introDistance = distance;
+						virtualMinX = j;
+						virtualMinY = i;
+						finalX = hexMap[i][j].realLocationX;
+						finalY = hexMap[i][j].realLocationY;
+					}
+					if (distance > introDistance&&distance <= intro2Distance) {
+						intro2Distance = distance;
+						virtualMin2X = j;
+						virtualMin2Y = i;
+						final2X = hexMap[i][j].realLocationX;
+						final2Y = hexMap[i][j].realLocationY;
+					}
 				}
-				if (distance > introDistance&&distance <= intro2Distance) {
-					intro2Distance = distance;
-					virtualMin2X = j;
-					virtualMin2Y = i;
-					final2X = hexMap[i][j].realLocationX;
-					final2Y = hexMap[i][j].realLocationY;
-				}
+
 			}
-
-		}
 		//---------tile selected
 			paint(&d3dspt,gameobj->tileSelected.texture,88,60,1, MAP_START_X+ finalX-44,MAP_START_Y+ finalY-30,255 );
 			
-			if (hexMap[virtualMinY][virtualMinX].P_child!=NULL) {
+		
+
+			if ((hexMap[virtualMinY][virtualMinX].P_child != NULL) && (hexMap[virtualMin2Y][virtualMin2X].P_child != NULL)) {
+				if (hexMap[virtualMinY][virtualMinX].P_child->belong != hexMap[virtualMin2Y][virtualMin2X].P_child->belong) {
 					if (virtualMin2X == turnVector.front()->virtualLocation_x&&
 						virtualMin2Y == turnVector.front()->virtualLocation_y) {
 						paint(&d3dspt, gameobj->tileSelected.texture, 88, 60, 1, MAP_START_X + final2X - 44, MAP_START_Y + final2Y - 30, 255);
 					}
 				}
-				
+				}
+		}
 			
-		
-
+		//--------------attackController
+		 attackaniCon(hexMap[virtualMin2Y][virtualMin2X].P_child, hexMap[virtualMinY][virtualMinX].P_child);
 
 	
 	int turnVectorStartX = 300;
@@ -2043,7 +2118,7 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 
 	for (int i = 0; i < hexMap.size(); i++) {
 		for (int j = 0; j < hexMap[i].size(); j++) {
-			if (hexMap[i][j].UnitOnTile == true) {
+			if (hexMap[i][j].UnitOnTile == true&& hexMap[i][j].P_child->active == true) {
 				hexMap[i][j].P_child->realLocationSetting();
 				if (hexMap[i][j].P_child->belong == Child::Belong::leftHero) {
 
@@ -2072,8 +2147,28 @@ void render_frame(GameIntro *intro, GameObj* gameobj, Hero*hero_left, Hero*hero_
 			
 		}
 	}
+	bool redTeamEmpty = true;
+	for (int i = 0; i < unitVector.size(); i++) {
+		if (unitVector[i].belong == Child::Belong::rightHero&&unitVector[i].quantity > 0) {
+			redTeamEmpty = false;
+		}
+	}
 
+	bool greenTeamEmpty = true;
+	for (int i = 0; i < unitVector.size(); i++) {
+		if (unitVector[i].belong == Child::Belong::leftHero&&unitVector[i].quantity > 0) {
+			greenTeamEmpty = false;
+		}
+	}
 
+	if (redTeamEmpty) {
+		gameState->state = GameState::State::Running;
+		paint(&d3dspt, gameobj->redWin.texture, gameobj->redWin.textureinfo.Width, gameobj->redWin.textureinfo.Height, 1, SCREEN_WIDTH/2- gameobj->redWin.textureinfo.Width/2, SCREEN_HEIGHT/2 - gameobj->redWin.textureinfo.Height/2, 255);
+	}
+	else if (greenTeamEmpty) {
+		gameState->state = GameState::State::Running;
+		paint(&d3dspt, gameobj->greenWin.texture, gameobj->greenWin.textureinfo.Width, gameobj->greenWin.textureinfo.Height, 1, SCREEN_WIDTH / 2 - gameobj->greenWin.textureinfo.Width / 2, SCREEN_HEIGHT / 2 - gameobj->greenWin.textureinfo.Height / 2, 255);
+	}
 
 //		paint(&d3dspt, hero_left->child1->avatar.texture, 10, 10, MAP_START_X, MAP_START_Y, 255);
 	
